@@ -69,7 +69,7 @@ public class BuyTicketHandler : MonoBehaviour
         DateTime currTime = DateTime.Now;
         for(int i=0; i<7; i++)
         {
-            currTime = currTime.AddDays(i);
+            currTime = currTime.AddDays(1);
             m_nextAvailableDates.Add(currTime.ToString(DATEFORMAT));
         }
     }

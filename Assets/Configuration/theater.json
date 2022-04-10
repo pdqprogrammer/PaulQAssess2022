@@ -11,6 +11,16 @@
             "name" : "C-Hall",
             "rows" : 8,
             "seats" : 15
+        },
+        {
+            "name" : "H-Hall",
+            "rows" : 6,
+            "seats" : 10
+        },
+        {
+            "name" : "V-Hall",
+            "rows" : 15,
+            "seats" : 6
         }
     ]
 }

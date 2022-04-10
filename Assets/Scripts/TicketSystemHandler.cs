@@ -21,8 +21,8 @@ public class TicketSystemHandler : MonoBehaviour
     private UserData m_userData;
     private User m_currentUser;
 
-    string m_bookingDataPath = Application.streamingAssetsPath + "/bookings.json";
-    string m_userDataPath = Application.streamingAssetsPath + "/users.json";
+    string m_bookingDataPath = Path.Combine(Application.streamingAssetsPath, "bookings.json");
+    string m_userDataPath = Path.Combine(Application.streamingAssetsPath, "users.json");
 
     public TheaterData TheaterData => m_theaterData;
     public List<TheaterMovieData> TheaterMovieData => m_theaterMovieData;
@@ -36,11 +36,25 @@ public class TicketSystemHandler : MonoBehaviour
 
         if (File.Exists(m_bookingDataPath))
         {
-            string fileContents = File.ReadAllText(m_bookingDataPath);
+            string fileContents;
+
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                UnityWebRequest www = UnityEngine.Networking.UnityWebRequest.Get(m_bookingDataPath);
+                www.SendWebRequest();
+
+                while (!www.isDone) { }//TODO replace this
+
+                fileContents = www.downloadHandler.text;
+            }
+            else
+            {
+                fileContents = File.ReadAllText(m_bookingDataPath);
+            }
+
             m_bookingData = JsonUtility.FromJson<BookingData>(fileContents);
         }
 
-        Login("Test User");
         StartCoroutine(SetMovieData());
     }
 
@@ -91,11 +105,28 @@ public class TicketSystemHandler : MonoBehaviour
     public void Login(string userName)
     {
         //NOTE: this data should not be stored in a full application because of security issues
-        if(m_userData == null)
+        if (m_userData == null)
         {
             if (File.Exists(m_userDataPath))
             {
-                string fileContents = File.ReadAllText(m_userDataPath);
+                string fileContents;
+
+                Debug.Log("Starting data check");
+
+                if (Application.platform == RuntimePlatform.Android)
+                {
+                    UnityWebRequest www = UnityEngine.Networking.UnityWebRequest.Get(m_userDataPath);
+                    www.SendWebRequest();
+
+                    while (!www.isDone) { }//TODO replace this
+
+                    fileContents = www.downloadHandler.text;
+                }
+                else
+                {
+                    fileContents = fileContents = File.ReadAllText(m_userDataPath);
+                }
+
                 m_userData = JsonUtility.FromJson<UserData>(fileContents);
             }
         }
