@@ -1,0 +1,133 @@
+{
+    "users": [
+        {
+            "name": "John Riggs",
+            "id": 1,
+            "reservations": [
+                {
+                    "movie": "John Wick",
+                    "date": "10/30/2014",
+                    "time": "3:30 PM",
+                    "seating": [
+                        {
+                            "row": 5,
+                            "seat": 7
+                        }
+                    ]
+                },
+                {
+                    "movie": "Sonic the Hedgehog 2",
+                    "date": "4/10/2022",
+                    "time": "11:00 AM",
+                    "seating": [
+                        {
+                            "row": 3,
+                            "seat": 3
+                        },
+                        {
+                            "row": 3,
+                            "seat": 4
+                        }
+                    ]
+                },
+                {
+                    "movie": "Turning Red",
+                    "date": "4/13/2022",
+                    "time": "3:20 PM",
+                    "seating": [
+                        {
+                            "row": 2,
+                            "seat": 6
+                        },
+                        {
+                            "row": 2,
+                            "seat": 7
+                        },
+                        {
+                            "row": 2,
+                            "seat": 8
+                        },
+                        {
+                            "row": 2,
+                            "seat": 9
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Jodie Forrester",
+            "id": 2,
+            "reservations": [
+                {
+                    "movie": "Jurassic Park",
+                    "date": "7/1/1993",
+                    "time": "8:15 PM",
+                    "seating": [
+                        {
+                            "row": 10,
+                            "seat": 2
+                        },
+                        {
+                            "row": 10,
+                            "seat": 1
+                        }
+                    ]
+                },
+                {
+                    "movie": "Final Fantasy The Spirit Within",
+                    "date": "7/15/2001",
+                    "time": "11:30 AM",
+                    "seating": [
+                        {
+                            "row": 1,
+                            "seat": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Big Poppa",
+            "id": 3,
+            "reservations": [
+                {
+                    "movie": "Turning Red",
+                    "date": "4/13/2022",
+                    "time": "3:20 PM",
+                    "seating": [
+                        {
+                            "row": 5,
+                            "seat": 8
+                        },
+                        {
+                            "row": 5,
+                            "seat": 9
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Jax Forever",
+            "id": 4,
+            "reservations": [
+                {
+                    "movie": "Sonic the Hedgehog 2",
+                    "date": "4/10/2022",
+                    "time": "4:04 PM",
+                    "seating": [
+                        {
+                            "row": 3,
+                            "seat": 7
+                        },
+                        {
+                            "row": 3,
+                            "seat": 8
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

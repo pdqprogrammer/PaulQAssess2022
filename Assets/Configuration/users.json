@@ -1,0 +1,53 @@
+{
+    "users": [
+        {
+            "name": "John Riggs",
+            "id": 1,
+            "reservations": [
+                {
+                    "movie": "John Wick",
+                    "date": "10/30/2014",
+                    "time": "3:30 PM",
+                    "seating": [
+                        {
+                            "row": 5,
+                            "seat": 7
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Jodie Forrester",
+            "id": 2,
+            "reservations": [
+                {
+                    "movie": "Jurassic Park",
+                    "date": "7/1/1993",
+                    "time": "8:15 PM",
+                    "seating": [
+                        {
+                            "row": 10,
+                            "seat": 2
+                        },
+                        {
+                            "row": 10,
+                            "seat": 1
+                        }
+                    ]
+                },
+                {
+                    "movie": "Final Fantasy The Spirit Within",
+                    "date": "7/15/2001",
+                    "time": "11:30 AM",
+                    "seating": [
+                        {
+                            "row": 1,
+                            "seat": 1
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

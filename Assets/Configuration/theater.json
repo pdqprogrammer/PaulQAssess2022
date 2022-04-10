@@ -1,0 +1,16 @@
+{
+    "name" : "Movie Town Supreme",
+    "openTime" : "11:00AM",
+    "halls" : [
+        {
+            "name" : "A-Hall",
+            "rows" : 10,
+            "seats" : 12
+        },
+        {
+            "name" : "C-Hall",
+            "rows" : 8,
+            "seats" : 15
+        }
+    ]
+}
