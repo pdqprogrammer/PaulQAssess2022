@@ -39,16 +39,17 @@ public class TicketSystemHandler : MonoBehaviour
         m_theaterMovieData = new List<TheaterMovieData>();
         m_theaterData = JsonUtility.FromJson<TheaterData>(m_theaterDataText.text);
 
-        //SetPathsForAndroid();
+        StartCoroutine(SetMovieData());
+    }
+
+    private void Start()
+    {
+        SetPathsForAndroid();
         string fileContents;
 
         if (Application.platform == RuntimePlatform.Android)
         {
-            UnityWebRequest www = UnityWebRequest.Get(m_bookingDataPath);
-            www.SendWebRequest();
-            while (!www.isDone) { }
-            fileContents = www.downloadHandler.text;
-            //fileContents = File.ReadAllText(m_bookingDataAndroidPath);
+            fileContents = File.ReadAllText(m_bookingDataAndroidPath);
         }
         else
         {
@@ -56,8 +57,6 @@ public class TicketSystemHandler : MonoBehaviour
         }
 
         m_bookingData = JsonUtility.FromJson<BookingData>(fileContents);
-
-        StartCoroutine(SetMovieData());
     }
 
     private IEnumerator SetMovieData()
@@ -111,8 +110,7 @@ public class TicketSystemHandler : MonoBehaviour
                 UnityWebRequest www = UnityWebRequest.Get(m_bookingDataPath);
                 www.SendWebRequest();
                 while (!www.isDone) { }
-                fileContents = www.downloadHandler.text;
-                File.WriteAllText(m_bookingDataAndroidPath, fileContents);
+                File.WriteAllBytes(m_bookingDataAndroidPath, www.downloadHandler.data);
             }
 
             if (!File.Exists(m_userDataAndroidPath))
@@ -120,8 +118,7 @@ public class TicketSystemHandler : MonoBehaviour
                 UnityWebRequest www = UnityWebRequest.Get(m_userDataPath);
                 www.SendWebRequest();
                 while (!www.isDone) { }
-                fileContents = www.downloadHandler.text;
-                File.WriteAllText(m_userDataAndroidPath, fileContents);
+                File.WriteAllBytes(m_userDataAndroidPath, www.downloadHandler.data);
             }
         }
     }
@@ -139,11 +136,7 @@ public class TicketSystemHandler : MonoBehaviour
 
             if (Application.platform == RuntimePlatform.Android)
             {
-                UnityWebRequest www = UnityWebRequest.Get(m_userDataPath);
-                www.SendWebRequest();
-                while (!www.isDone) { }
-                fileContents = www.downloadHandler.text;
-                //fileContents = File.ReadAllText(m_userDataAndroidPath);
+                fileContents = File.ReadAllText(m_userDataAndroidPath);
             }
             else
             {
