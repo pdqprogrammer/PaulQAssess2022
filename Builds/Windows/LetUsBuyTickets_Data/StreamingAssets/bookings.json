@@ -1,0 +1,71 @@
+{
+    "bookings": [
+        {
+            "id": "675353-4/10/2022-11:00 AM",
+            "reservedseating": [
+                {
+                    "row": 5,
+                    "seat": 7
+                },
+                {
+                    "row": 10,
+                    "seat": 2
+                },
+                {
+                    "row": 10,
+                    "seat": 1
+                },
+                {
+                    "row": 3,
+                    "seat": 3
+                },
+                {
+                    "row": 3,
+                    "seat": 4
+                }
+            ]
+        },
+        {
+            "id": "508947-4/13/2022-3:20 PM",
+            "reservedseating": [
+                {
+                    "row": 2,
+                    "seat": 6
+                },
+                {
+                    "row": 2,
+                    "seat": 7
+                },
+                {
+                    "row": 2,
+                    "seat": 8
+                },
+                {
+                    "row": 2,
+                    "seat": 9
+                },
+                {
+                    "row": 5,
+                    "seat": 8
+                },
+                {
+                    "row": 5,
+                    "seat": 9
+                }
+            ]
+        },
+        {
+            "id": "675353-4/10/2022-4:04 PM",
+            "reservedseating": [
+                {
+                    "row": 3,
+                    "seat": 7
+                },
+                {
+                    "row": 3,
+                    "seat": 8
+                }
+            ]
+        }
+    ]
+}

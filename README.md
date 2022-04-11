@@ -6,8 +6,6 @@ Run Instructions:
 Windows - This application is set to run using the Streaming Assets files and update those directly. Standard build settings with a resolution of 1920x1080 have been set for a Windowed application.
 Android - This application is built to run in a landscape view.
 
-/////renamae github make public
-
 Sample existing user - "John Riggs"
 This test user features reservations as an example of previous movie choices.
 
