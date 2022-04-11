@@ -24,36 +24,38 @@ public class TicketSystemHandler : MonoBehaviour
     string m_bookingDataPath = Path.Combine(Application.streamingAssetsPath, "bookings.json");
     string m_userDataPath = Path.Combine(Application.streamingAssetsPath, "users.json");
 
+    string m_bookingDataAndroidPath;
+    string m_userDataAndroidPath;
+
     public TheaterData TheaterData => m_theaterData;
     public List<TheaterMovieData> TheaterMovieData => m_theaterMovieData;
     public User CurrentUser => m_currentUser;
 
     private void Awake()
     {
+        m_bookingDataAndroidPath = Path.Combine(Application.persistentDataPath, "bookings.json");
+        m_userDataAndroidPath = Path.Combine(Application.persistentDataPath, "users.json");
+        
         m_theaterMovieData = new List<TheaterMovieData>();
-
         m_theaterData = JsonUtility.FromJson<TheaterData>(m_theaterDataText.text);
 
-        if (File.Exists(m_bookingDataPath))
+        //SetPathsForAndroid();
+        string fileContents;
+
+        if (Application.platform == RuntimePlatform.Android)
         {
-            string fileContents;
-
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                UnityWebRequest www = UnityEngine.Networking.UnityWebRequest.Get(m_bookingDataPath);
-                www.SendWebRequest();
-
-                while (!www.isDone) { }//TODO replace this
-
-                fileContents = www.downloadHandler.text;
-            }
-            else
-            {
-                fileContents = File.ReadAllText(m_bookingDataPath);
-            }
-
-            m_bookingData = JsonUtility.FromJson<BookingData>(fileContents);
+            UnityWebRequest www = UnityWebRequest.Get(m_bookingDataPath);
+            www.SendWebRequest();
+            while (!www.isDone) { }
+            fileContents = www.downloadHandler.text;
+            //fileContents = File.ReadAllText(m_bookingDataAndroidPath);
         }
+        else
+        {
+            fileContents = File.ReadAllText(m_bookingDataPath);
+        }
+
+        m_bookingData = JsonUtility.FromJson<BookingData>(fileContents);
 
         StartCoroutine(SetMovieData());
     }
@@ -98,6 +100,32 @@ public class TicketSystemHandler : MonoBehaviour
         }
     }
 
+    private void SetPathsForAndroid()
+    {
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            string fileContents;
+
+            if (!File.Exists(m_bookingDataAndroidPath))
+            {
+                UnityWebRequest www = UnityWebRequest.Get(m_bookingDataPath);
+                www.SendWebRequest();
+                while (!www.isDone) { }
+                fileContents = www.downloadHandler.text;
+                File.WriteAllText(m_bookingDataAndroidPath, fileContents);
+            }
+
+            if (!File.Exists(m_userDataAndroidPath))
+            {
+                UnityWebRequest www = UnityWebRequest.Get(m_userDataPath);
+                www.SendWebRequest();
+                while (!www.isDone) { }
+                fileContents = www.downloadHandler.text;
+                File.WriteAllText(m_userDataAndroidPath, fileContents);
+            }
+        }
+    }
+
     /// <summary>
     /// method for handling the setting of current user based on name input and users that have logged in
     /// </summary>
@@ -107,28 +135,24 @@ public class TicketSystemHandler : MonoBehaviour
         //NOTE: this data should not be stored in a full application because of security issues
         if (m_userData == null)
         {
-            if (File.Exists(m_userDataPath))
+            string fileContents;
+
+            if (Application.platform == RuntimePlatform.Android)
             {
-                string fileContents;
-
-                Debug.Log("Starting data check");
-
-                if (Application.platform == RuntimePlatform.Android)
-                {
-                    UnityWebRequest www = UnityEngine.Networking.UnityWebRequest.Get(m_userDataPath);
-                    www.SendWebRequest();
-
-                    while (!www.isDone) { }//TODO replace this
-
-                    fileContents = www.downloadHandler.text;
-                }
-                else
-                {
-                    fileContents = fileContents = File.ReadAllText(m_userDataPath);
-                }
-
-                m_userData = JsonUtility.FromJson<UserData>(fileContents);
+                UnityWebRequest www = UnityWebRequest.Get(m_userDataPath);
+                www.SendWebRequest();
+                while (!www.isDone) { }
+                fileContents = www.downloadHandler.text;
+                //fileContents = File.ReadAllText(m_userDataAndroidPath);
             }
+            else
+            {
+                fileContents = File.ReadAllText(m_userDataPath);
+            }
+
+                
+            m_userData = JsonUtility.FromJson<UserData>(fileContents);
+            Debug.Log("Got user data");
         }
 
         for(int i=0; i< m_userData.users.Count; i++)
@@ -204,8 +228,17 @@ public class TicketSystemHandler : MonoBehaviour
         string userJson = JsonUtility.ToJson(m_userData, true);
         string bookingsJson = JsonUtility.ToJson(m_bookingData, true);
 
-        File.WriteAllText(m_userDataPath, userJson);
-        File.WriteAllText(m_bookingDataPath, bookingsJson);
+        //TODO check if android then save file
+        if(Application.platform == RuntimePlatform.Android)
+        {
+            File.WriteAllText(m_userDataAndroidPath, userJson);
+            File.WriteAllText(m_bookingDataAndroidPath, bookingsJson);
+        }
+        else
+        {
+            File.WriteAllText(m_userDataPath, userJson);
+            File.WriteAllText(m_bookingDataPath, bookingsJson);
+        }
     }
 
     /// <summary>

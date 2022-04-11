@@ -61,6 +61,7 @@ public class UserProfileHandler : MonoBehaviour
     {
         gameObject.SetActive(true);
         m_userNameText.SetText(m_ticketSystemHandler.CurrentUser.name);
+        ClearReservations();
 
         List<Reservation> reservations = m_ticketSystemHandler.CurrentUser.reservations;
 
