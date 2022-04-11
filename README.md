@@ -3,8 +3,16 @@
 TARGET DEVICES - Windows and Android
 
 Run Instructions:
-Windows - 
-Android - 
+Windows - This application is set to run using the Streaming Assets files and update those directly. Standard build settings with a resolution of 1920x1080 have been set for a Windowed application.
+Android - This application is built to run in a landscape view.
+
+
+
+/////Update resolution and scaling settings /////test android changes /////renamae github make public
+
+
+
+
 
 Sample existing user - "John Riggs"
 This test user features reservations as an example of previous movie choices.
@@ -70,3 +78,4 @@ While the application gets the minimal done there are some future considerations
 -Building out locks on seating would be another function to build out to avoid someone from buying the same seat as another person.
 -Build out for multiple theaters eventually that would require managing the data differently that in this case.
 -Along the lines of recommending seats based on party size, recommending theaters based on user location or home data that could be added to the user profile.
+-Adding in support for more resolutions to accomodate for a large variety of devices.

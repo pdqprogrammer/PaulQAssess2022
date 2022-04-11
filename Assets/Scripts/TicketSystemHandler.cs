@@ -35,7 +35,7 @@ public class TicketSystemHandler : MonoBehaviour
     {
         m_bookingDataAndroidPath = Path.Combine(Application.persistentDataPath, "bookings.json");
         m_userDataAndroidPath = Path.Combine(Application.persistentDataPath, "users.json");
-        
+
         m_theaterMovieData = new List<TheaterMovieData>();
         m_theaterData = JsonUtility.FromJson<TheaterData>(m_theaterDataText.text);
 
@@ -81,7 +81,7 @@ public class TicketSystemHandler : MonoBehaviour
 
         int moviesToRun = (m_theaterData.halls.Length < movieResults.Length) ? m_theaterData.halls.Length : movieResults.Length;
 
-        for (int i=0; i < moviesToRun; i++)
+        for (int i = 0; i < moviesToRun; i++)
         {
             string movieUrl = urlFront + movieResults[i].id + urlBack;
             UnityWebRequest webConnection = UnityWebRequest.Get(movieUrl);
@@ -150,12 +150,12 @@ public class TicketSystemHandler : MonoBehaviour
                 fileContents = File.ReadAllText(m_userDataPath);
             }
 
-                
+
             m_userData = JsonUtility.FromJson<UserData>(fileContents);
             Debug.Log("Got user data");
         }
 
-        for(int i=0; i< m_userData.users.Count; i++)
+        for (int i = 0; i < m_userData.users.Count; i++)
         {
             if (userName.Equals(m_userData.users[i].name))
             {
@@ -164,7 +164,7 @@ public class TicketSystemHandler : MonoBehaviour
         }
 
         //check if user was not set
-        if(m_currentUser == null)
+        if (m_currentUser == null)
         {
             m_currentUser = new User();
             m_currentUser.name = userName;
@@ -192,9 +192,9 @@ public class TicketSystemHandler : MonoBehaviour
         m_currentUser.reservations.Add(reservation);
         bool userFound = false;
 
-        for(int i=0; i<m_userData.users.Count; i++)
+        for (int i = 0; i < m_userData.users.Count; i++)
         {
-            if(m_userData.users[i].id == m_currentUser.id)
+            if (m_userData.users[i].id == m_currentUser.id)
             {
                 m_userData.users[i] = m_currentUser;
                 userFound = true;
@@ -229,7 +229,7 @@ public class TicketSystemHandler : MonoBehaviour
         string bookingsJson = JsonUtility.ToJson(m_bookingData, true);
 
         //TODO check if android then save file
-        if(Application.platform == RuntimePlatform.Android)
+        if (Application.platform == RuntimePlatform.Android)
         {
             File.WriteAllText(m_userDataAndroidPath, userJson);
             File.WriteAllText(m_bookingDataAndroidPath, bookingsJson);
